@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { nanoid } from 'nanoid';
 import { ContactForm, FormLabel, FormInput, FormButton } from './Form.styled';
 
 class Form extends Component {
@@ -57,5 +56,4 @@ export default Form;
 
 Form.propTypes = {
   handleSubmit: PropTypes.func,
-  handleChange: PropTypes.func,
 };

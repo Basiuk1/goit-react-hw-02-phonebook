@@ -18,22 +18,13 @@ class App extends React.Component {
     filter: '',
   };
 
-  // addContact = contactItem => {
-  //   console.log(contactItem);
-  //   // const { name } = contactItem;
-  // if (this.state.contacts.some(contact => contact.name === name)) {
-  //   Notiflix.Report.warning('Warning', `${name} is already in contacts.`);
-  // } else {
-  //   this.setState(({ contacts }) => ({
-  //     contacts: [contactItem, ...contacts],
-  //   }));
-  //   }
-  // };
-
   addContact = ({ name, number }) => {
     const newContact = { name, number, id: nanoid() };
+    const existingContact = this.state.contacts.find(
+      contact => contact.name === name
+    );
 
-    if (this.state.contacts.some(contact => contact.name === name)) {
+    if (existingContact) {
       Notiflix.Report.warning('Warning', `${name} is already in contacts.`);
     } else {
       this.setState(({ contacts }) => ({
