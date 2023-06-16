@@ -1,11 +1,10 @@
 import React from 'react';
 import Form from '../Form';
 import ContactList from '../ContactList/ContactList';
-import { nanoid } from 'nanoid';
 import Filter from '../FilterContacts/FilterContacts';
-import { Container, Title, Section } from './App.styled';
-
+import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
+import { Container, Title, Section } from './App.styled';
 
 class App extends React.Component {
   state = {
@@ -17,6 +16,23 @@ class App extends React.Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  // componentWillUnmount() {}
 
   addContact = ({ name, number }) => {
     const newContact = { name, number, id: nanoid() };
